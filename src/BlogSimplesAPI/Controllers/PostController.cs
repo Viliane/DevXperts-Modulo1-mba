@@ -1,10 +1,12 @@
 ﻿using BlogSimplesAPI.Models;
 using BlogSimplesAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSimplesAPI.Controllers
 {
+    [Authorize]
     [Route("api/post")]
     [ApiController]
     public class PostController : ControllerBase
@@ -18,6 +20,7 @@ namespace BlogSimplesAPI.Controllers
             _postServices = postServices;
         }
 
+        [AllowAnonymous]
         [HttpGet()]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         public IActionResult GetAll()
@@ -25,6 +28,7 @@ namespace BlogSimplesAPI.Controllers
             return Ok(_postServices.GetAll());
         }
 
+        [AllowAnonymous]
         [HttpGet("id")]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         [ProducesResponseType( StatusCodes.Status404NotFound)]

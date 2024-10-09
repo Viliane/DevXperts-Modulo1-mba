@@ -1,0 +1,13 @@
+﻿namespace BlogSimplesAPI.Models
+{
+    public class JwtToken
+    {
+        public string Segredo  { get; set; }
+
+        public int ExpiracaoHoras { get; set; }
+
+        public string Emissor { get; set; }
+
+        public string Audiencia { get; set; }
+    }
+}

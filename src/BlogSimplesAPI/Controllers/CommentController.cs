@@ -1,9 +1,11 @@
 ﻿using BlogSimplesAPI.Models;
 using BlogSimplesAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSimplesAPI.Controllers
 {
+    [Authorize]
     [Route("api/comment")]
     [ApiController]
     public class CommentController : ControllerBase
