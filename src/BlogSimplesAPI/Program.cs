@@ -57,7 +57,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApiDbContext>();
+    .AddEntityFrameworkStores<ApiDbContext>()
+    .AddDefaultTokenProviders();
 
 var JwtTokenSection = builder.Configuration.GetSection("JwtToken");
 builder.Services.Configure<JwtToken>(JwtTokenSection);

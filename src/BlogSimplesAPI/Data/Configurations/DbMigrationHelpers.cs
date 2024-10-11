@@ -48,6 +48,8 @@ namespace BlogSimplesAPI.Data.Configurations
                 Id = UserId,
                 UserName = "jose.silva@teste.com",
                 NormalizedUserName = "JOSE.SILVA@TESTE.COM",
+                Email = "jose.silva@teste.com",
+                NormalizedEmail = "JOSE.SILVA@TESTE.COM",
                 AccessFailedCount = 0,
                 LockoutEnabled = false,
                 PasswordHash = "AQAAAAIAAYagAAAAECMKSSgkIWp4tYMw8eMIApmS+1rt8iUew8pn0daWPtVk1YXuLWsbVO3MTGeDSWMGrA==", //Teste@123
@@ -71,7 +73,8 @@ namespace BlogSimplesAPI.Data.Configurations
 
             await context.SaveChangesAsync();
 
-            await context.UserRoles.AddAsync(new IdentityUserRole<string>{
+            await context.UserRoles.AddAsync(new IdentityUserRole<string>
+            {
                 UserId = UserId,
                 RoleId = RoleId
             });
@@ -96,6 +99,8 @@ namespace BlogSimplesAPI.Data.Configurations
                 Id = UserId1,
                 UserName = "maria.silva@teste.com",
                 NormalizedUserName = "MARIA.SILVA@TESTE.COM",
+                Email = "maria.silva@teste.com",
+                NormalizedEmail = "MARIA.SILVA@TESTE.COM",
                 AccessFailedCount = 0,
                 LockoutEnabled = false,
                 PasswordHash = "AQAAAAIAAYagAAAAECMKSSgkIWp4tYMw8eMIApmS+1rt8iUew8pn0daWPtVk1YXuLWsbVO3MTGeDSWMGrA==", //Teste@123
@@ -126,6 +131,8 @@ namespace BlogSimplesAPI.Data.Configurations
                 Id = UserId2,
                 UserName = "joao.silva@teste.com",
                 NormalizedUserName = "JOAO.SILVA@TESTE.COM",
+                Email = "joao.silva@teste.com",
+                NormalizedEmail = "JOAO.SILVA@TESTE.COM",
                 AccessFailedCount = 0,
                 LockoutEnabled = false,
                 PasswordHash = "AQAAAAIAAYagAAAAECMKSSgkIWp4tYMw8eMIApmS+1rt8iUew8pn0daWPtVk1YXuLWsbVO3MTGeDSWMGrA==", //Teste@123
