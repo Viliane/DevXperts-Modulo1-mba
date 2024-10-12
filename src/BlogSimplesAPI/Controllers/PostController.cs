@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSimplesAPI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize()]
     [Route("api/post")]
     [ApiController]
     public class PostController : ControllerBase
@@ -28,7 +28,6 @@ namespace BlogSimplesAPI.Controllers
             return Ok(_postServices.GetAll());
         }
 
-        [AllowAnonymous]
         [HttpGet("id")]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         [ProducesResponseType( StatusCodes.Status404NotFound)]

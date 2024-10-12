@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSimplesAPI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize()]
     [Route("api/comment")]
     [ApiController]
     public class CommentController : ControllerBase
@@ -20,6 +20,7 @@ namespace BlogSimplesAPI.Controllers
         }
 
         [HttpGet()]
+        [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         public IActionResult GetAll()
         {
             _commentServices.GetAll();
@@ -27,6 +28,8 @@ namespace BlogSimplesAPI.Controllers
         }
 
         [HttpGet("id")]
+        [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Get(int id)
         {
             _commentServices.GetById(id);
@@ -35,6 +38,8 @@ namespace BlogSimplesAPI.Controllers
         }
 
         [HttpPost()]
+        [ProducesResponseType(typeof(Post), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Post(Comments comments)
         {
             _commentServices.Insert(comments);
@@ -42,6 +47,8 @@ namespace BlogSimplesAPI.Controllers
         }
 
         [HttpPut("id")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Put(int id, Comments comments)
         {
             if (id != comments.Id) return BadRequest();
@@ -51,6 +58,8 @@ namespace BlogSimplesAPI.Controllers
         }
 
         [HttpDelete("id")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete(int id)
         {
             _commentServices.Delete(id);

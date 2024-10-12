@@ -38,7 +38,6 @@ namespace BlogSimplesAPI.Controllers
 
         [HttpPost("register")]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Register(RegisterUser registerUser)
         {
             if (!ModelState.IsValid) return ValidationProblem(ModelState);
@@ -69,7 +68,9 @@ namespace BlogSimplesAPI.Controllers
             return Problem("Failed to register user");
         }
 
-        [HttpPost("login")]        
+        [HttpPost("login")]
+        [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Login(LoginUser loginUser)
         {
 
