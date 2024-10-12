@@ -18,9 +18,9 @@ namespace BlogSimplesAPI.Services
             _repositoryComment.DeleteById(id);
         }
 
-        public void GetAll()
+        public IEnumerable<Comments> GetAll()
         {
-            _repositoryComment.GetAll();
+            return _repositoryComment.GetAll();
         }
 
         public Comments GetById(int id)

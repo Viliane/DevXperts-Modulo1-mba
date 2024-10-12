@@ -19,39 +19,58 @@ namespace BlogSimplesAPI.Controllers
             _commentServices = commentServices;
         }
 
+        [AllowAnonymous]
         [HttpGet()]
-        [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Comments), StatusCodes.Status200OK)]
         public IActionResult GetAll()
         {
-            _commentServices.GetAll();
-            return Ok();
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
+            return Ok(_commentServices.GetAll());
         }
 
         [HttpGet("id")]
-        [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Comments), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Get(int id)
         {
-            _commentServices.GetById(id);
-            return Ok();
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
 
+            
+            return Ok(_commentServices.GetById(id));
         }
 
         [HttpPost()]
-        [ProducesResponseType(typeof(Post), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Post(Comments comments)
+        public IActionResult Insert(CommentView commentsView)
         {
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
+            var comments = new Comments
+            {   
+                PostId = commentsView.PostId,
+                Description = commentsView.Description
+            };
+
             _commentServices.Insert(comments);
-            return CreatedAtAction("Comment", new { id = comments.Id }, comments);
+            return NoContent();
         }
 
         [HttpPut("id")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Put(int id, Comments comments)
+        public IActionResult Put(int id, CommentView commentsView)
         {
-            if (id != comments.Id) return BadRequest();
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
+            var comments = new Comments
+            {
+                Id = id,
+                PostId = commentsView.PostId,
+                Description = commentsView.Description
+            };
+
             _commentServices.Update(comments);
             
             return NoContent();
@@ -62,6 +81,8 @@ namespace BlogSimplesAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete(int id)
         {
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
             _commentServices.Delete(id);
             return NoContent();
         }

@@ -25,22 +25,36 @@ namespace BlogSimplesAPI.Controllers
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         public IActionResult GetAll()
         {
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
             return Ok(_postServices.GetAll());
         }
 
         [HttpGet("id")]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
-        [ProducesResponseType( StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Get(int id)
         {
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
             return Ok(_postServices.GetById(id));
         }
 
         [HttpPost()]
         [ProducesResponseType(typeof(Post), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Post(Post post)
+        public IActionResult Post(PostView postView)
         {
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
+            var post = new Post
+            {
+                Title = postView.Title,
+                Description = postView.Description,
+                PublicationDate = postView.PublicationDate,
+                AuthorId = postView.AuthorId
+            };
+            
             _postServices.Insert(post);
             return CreatedAtAction("Post", new { id = post.Id }, post);
         }
@@ -48,12 +62,21 @@ namespace BlogSimplesAPI.Controllers
         [HttpPut("id")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Put(int id, Post post)
+        public IActionResult Put(int id, PostView postView)
         {
-            if (id != post.Id) return BadRequest();
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
+            var post = new Post
+            {
+                Id = id,
+                Title = postView.Title,
+                Description = postView.Description,
+                PublicationDate = postView.PublicationDate,
+                AuthorId = postView.AuthorId
+            };
 
             _postServices.Update(post);
-            
+
             return NoContent();
         }
 
@@ -62,6 +85,8 @@ namespace BlogSimplesAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete(int id)
         {
+            if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
             _postServices.Delete(id);
             return NoContent();
         }

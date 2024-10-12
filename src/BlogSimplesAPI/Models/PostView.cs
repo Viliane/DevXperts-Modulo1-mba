@@ -2,10 +2,8 @@
 
 namespace BlogSimplesAPI.Models
 {
-    public class Post
+    public class PostView
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "The field {0} is required")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "The field {0} must be between {2} and {1} characters")]
         public string Title { get; set; }
@@ -18,9 +16,5 @@ namespace BlogSimplesAPI.Models
 
         [Required(ErrorMessage = "The field {0} is required")]
         public string AuthorId { get; set; }
-
-        public Author Author { get; set; } 
-
-        public ICollection<Comments> Comments { get; set; }
     }
 }

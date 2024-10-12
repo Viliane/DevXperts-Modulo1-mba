@@ -7,7 +7,7 @@ namespace BlogSimplesAPI.Services.Interfaces
         void Insert(Comments comments);
         void Update(Comments comments);
         void Delete(int id);
-        void GetAll();
+        IEnumerable<Comments> GetAll();
         Comments GetById(int id);
     }
 }
