@@ -15,30 +15,30 @@ O projeto consiste em:
 + Acesso a Dados: Implementação de acesso ao banco de dados através de ORM.
 
 ## 3. Tecnologias Utilizadas
-+ Linguagem de Programação: C#
-+ Frameworks:
-++ ASP.NET Core MVC
-++ ASP.NET Core Web API
-++ Entity Framework Core
-+ Banco de Dados: SQL Server
-+ Autenticação e Autorização:
-++ ASP.NET Core Identity
-++ JWT (JSON Web Token) para autenticação na API
-+ Front-end:
-++ Razor Pages/Views
-++ HTML/CSS para estilização básica
-+ Documentação da API: Swagger
+* Linguagem de Programação: C#
+* Frameworks:
+  * ASP.NET Core MVC
+  * ASP.NET Core Web API
+  * Entity Framework Core
+* Banco de Dados: SQL Server
+* Autenticação e Autorização:
+  * ASP.NET Core Identity
+  * JWT (JSON Web Token) para autenticação na API
+* Front-end:
+  * Razor Pages/Views
+  * HTML/CSS para estilização básica
+* Documentação da API: Swagger
 
 ## 4. Estrutura do Projeto
 A estrutura do projeto é organizada da seguinte forma:
 
-src/
-.gitignore - Arquivo de Ignoração do Git
-.gitattributes
-BlogSimplesMVC.sln - Solution do projeto dividido na aplicação BlogSimplesMVC.UI e Blog SimpleAPI 
-FEEDBACK.md - Arquivo para Consolidação dos Feedbacks
-LICENSE.txt - MIT License
-README.md - Arquivo de Documentação do Projeto
+* src/
+* .gitignore - Arquivo de Ignoração do Git
+* .gitattributes
+* BlogSimplesMVC.sln - Solution do projeto dividido na aplicação BlogSimplesMVC.UI e Blog SimpleAPI 
+* FEEDBACK.md - Arquivo para Consolidação dos Feedbacks
+* LICENSE.txt - MIT License
+* README.md - Arquivo de Documentação do Projeto
 
 ## 5. Funcionalidades Implementadas
 * CRUD para Posts e Comentários: Permite criar, editar, visualizar e excluir posts e comentários.
