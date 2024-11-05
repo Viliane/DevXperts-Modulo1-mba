@@ -1,4 +1,6 @@
-﻿namespace BlogSimplesMvc.UI.Models
+﻿using BlogSimpleCore.Models;
+
+namespace BlogSimplesMvc.UI.Models
 {
     public class PostViewModel
     {

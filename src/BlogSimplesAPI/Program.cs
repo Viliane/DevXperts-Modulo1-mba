@@ -1,3 +1,5 @@
+using BlogSimpleCore.Config;
+using BlogSimpleCore.Data.Configurations;
 using BlogSimplesAPI.ApiConfig;
 using System.Text.Json.Serialization;
 
@@ -8,7 +10,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 builder.AddSwaggerConfig()
     .AddDbContextConfig()
-    .AddIdentityConfig()
+    .AddIdentityConfig()    
     .AddDependencyInjectionConfig();
 
 var app = builder.Build();
@@ -26,5 +28,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseDbMigrationHelper();
 
 app.Run();

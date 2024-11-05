@@ -1,10 +1,7 @@
-﻿using BlogSimplesMvc.UI.Models;
-using BlogSimplesMvc.UI.Services;
-using BlogSimplesMvc.UI.Services.Interfaces;
+﻿using BlogSimpleCore.Models;
+using BlogSimpleCore.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Xml.Linq;
 
 namespace BlogSimplesMvc.UI.Controllers
 {

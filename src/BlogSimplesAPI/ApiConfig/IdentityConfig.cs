@@ -1,10 +1,10 @@
-﻿using BlogSimplesAPI.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using BlogSimplesAPI.Models;
+using BlogSimpleCore.Data;
 
 namespace BlogSimplesAPI.ApiConfig
 {
@@ -16,7 +16,7 @@ namespace BlogSimplesAPI.ApiConfig
 
             builder.Services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApiDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             var JwtTokenSection = builder.Configuration.GetSection("JwtToken");
             builder.Services.Configure<JwtToken>(JwtTokenSection);

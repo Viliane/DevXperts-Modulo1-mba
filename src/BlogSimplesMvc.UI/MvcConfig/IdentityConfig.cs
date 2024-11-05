@@ -1,4 +1,4 @@
-﻿using BlogSimplesMvc.UI.Data;
+﻿using BlogSimpleCore.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
