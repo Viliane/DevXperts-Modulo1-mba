@@ -1,9 +1,12 @@
-﻿using BlogSimpleCore.Models;
+﻿using BlogSimpleCore.Helper;
+using BlogSimpleCore.Models;
 using BlogSimpleCore.Services.Interfaces;
 using BlogSimplesAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
 
 namespace BlogSimplesAPI.Controllers
 {
@@ -20,8 +23,7 @@ namespace BlogSimplesAPI.Controllers
             _logger = logger;
             _postServices = postServices;
         }
-
-        [AllowAnonymous]
+                
         [HttpGet()]
         [ProducesResponseType(typeof(Post), StatusCodes.Status200OK)]
         public IActionResult GetAll()
@@ -57,13 +59,17 @@ namespace BlogSimplesAPI.Controllers
                 PublicationDate = postView.PublicationDate,
                 AuthorId = postView.AuthorId
             };
-            
+
+            if (!Validate.IsValidateUser(HttpContext.User, post.AuthorId))
+            {
+                return new ObjectResult("You are not allowed to insert the post.") { StatusCode = 403 };
+            }
+
             _postServices.Insert(post);
             return CreatedAtAction("Post", new { id = post.Id }, post);
         }
 
         [HttpPut("id")]
-        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -81,20 +87,29 @@ namespace BlogSimplesAPI.Controllers
                 AuthorId = postView.AuthorId
             };
 
+            if (!Validate.IsValidateUser(HttpContext.User, post.AuthorId))
+            {
+                return new ObjectResult("You are not allowed to edit the post.") { StatusCode = 403 };
+            }
+
             _postServices.Update(post);
 
             return NoContent();
         }
 
         [HttpDelete("id")]
-        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, string AuthorId)
         {
             if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+
+            if (!Validate.IsValidateUser(HttpContext.User, AuthorId))
+            {
+                return new ObjectResult("You are not allowed to delete the post.") { StatusCode = 403 };
+            }
 
             _postServices.Delete(id);
             return NoContent();

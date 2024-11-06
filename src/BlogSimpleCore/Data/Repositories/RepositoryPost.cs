@@ -58,7 +58,7 @@ namespace BlogSimpleCore.Data.Repositories
         }
 
         public void DeleteById(int id)
-        {
+        {            
             _context.Posts.Remove(_context.Posts.Find(id));
             Save();
         }

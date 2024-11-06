@@ -1,4 +1,5 @@
-﻿using BlogSimpleCore.Models;
+﻿using BlogSimpleCore.Helper;
+using BlogSimpleCore.Models;
 using BlogSimpleCore.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +47,7 @@ namespace BlogSimplesMvc.UI.Controllers
 
         public IActionResult Edit(int id)
         {
-            var post = _postServices.GetById(id);
+            var post = _postServices.GetById(id);  
             return View(post);
         }
 
