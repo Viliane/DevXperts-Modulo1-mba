@@ -1,5 +1,6 @@
-using BlogSimplesMvc.UI.Data.Configurations;
+using BlogSimpleCore.Data.Configurations;
 using BlogSimplesMvc.UI.MvcConfig;
+using BlogSimpleCore.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 

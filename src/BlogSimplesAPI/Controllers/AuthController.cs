@@ -1,5 +1,6 @@
-﻿using BlogSimplesAPI.Models;
-using BlogSimplesAPI.Services.Interfaces;
+﻿using BlogSimpleCore.Models;
+using BlogSimpleCore.Services.Interfaces;
+using BlogSimplesAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;

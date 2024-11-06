@@ -1,7 +1,11 @@
-﻿using BlogSimplesAPI.Models;
-using BlogSimplesAPI.Services.Interfaces;
+﻿using BlogSimpleCore.Helper;
+using BlogSimpleCore.Models;
+using BlogSimpleCore.Services.Interfaces;
+using BlogSimplesAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+using System.Security.Cryptography;
 
 namespace BlogSimplesAPI.Controllers
 {
@@ -55,12 +59,16 @@ namespace BlogSimplesAPI.Controllers
                 Description = commentsView.Description
             };
 
+            if (!Validate.IsValidateUser(HttpContext.User, commentsView.AuthorId))
+            {
+                return new ObjectResult("You are not allowed to edit the comment.") { StatusCode = 403 };
+            }
+
             _commentServices.Insert(comments);
             return NoContent();
         }
 
         [HttpPut("id")]
-        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -76,20 +84,29 @@ namespace BlogSimplesAPI.Controllers
                 Description = commentsView.Description
             };
 
+            if (!Validate.IsValidateUser(HttpContext.User, commentsView.AuthorId))
+            {
+                return new ObjectResult("You are not allowed to edit the comment.") { StatusCode = 403 };
+            }
+
             _commentServices.Update(comments);
             
             return NoContent();
         }
 
         [HttpDelete("id")]
-        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, string AuthorId)
         {
             if (!ModelState.IsValid) { return ValidationProblem(ModelState); }
+             
+            if (!Validate.IsValidateUser(HttpContext.User, AuthorId))
+            {
+                return new ObjectResult("You are not allowed to delete the comment.") { StatusCode = 403 };
+            }   
 
             _commentServices.Delete(id);
             return NoContent();

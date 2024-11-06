@@ -10,8 +10,8 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-using BlogSimplesMvc.UI.Services;
-using BlogSimplesMvc.UI.Services.Interfaces;
+using BlogSimpleCore.Services;
+using BlogSimpleCore.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -130,7 +130,7 @@ namespace BlogSimplesMvc.UI.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    _blogServices.RegisterAuthor(new Models.Author() { Name = Input.Name, Id = user.Id });
+                    _blogServices.RegisterAuthor(new BlogSimpleCore.Models.Author() { Name = Input.Name, Id = user.Id });
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

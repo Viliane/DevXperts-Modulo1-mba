@@ -8,6 +8,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Data\**" />
+	  <Compile Remove="Services\**" />
+	  <Content Remove="Data\**" />
+	  <Content Remove="Services\**" />
+	  <EmbeddedResource Remove="Data\**" />
+	  <EmbeddedResource Remove="Services\**" />
+	  <None Remove="Data\**" />
+	  <None Remove="Services\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.8" />
@@ -20,6 +31,10 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BlogSimpleCore\BlogSimpleCore.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
+using BlogSimpleCore.Services.Interfaces;
 using BlogSimplesMvc.UI.Models;
-using BlogSimplesMvc.UI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSimplesMvc.UI.Controllers
