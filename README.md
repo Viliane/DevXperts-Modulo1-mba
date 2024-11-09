@@ -20,7 +20,7 @@ O projeto consiste em:
   * ASP.NET Core MVC
   * ASP.NET Core Web API
   * Entity Framework Core
-* Banco de Dados: SQL Server
+* Banco de Dados: SQLite
 * Autenticação e Autorização:
   * ASP.NET Core Identity
   * JWT (JSON Web Token) para autenticação na API
@@ -49,7 +49,7 @@ A estrutura do projeto é organizada da seguinte forma:
 ## 6. Como Executar o Projeto
 ### Pré-requisitos
 * .NET SDK 8.0 ou superior
-* SQL Server
+* SQLite
 * Visual Studio 2022 ou superior (ou qualquer IDE de sua preferência)
 * Git
 
